@@ -1,4 +1,4 @@
-package variable;
+package exam;
 
 public class VariableExample {
 	

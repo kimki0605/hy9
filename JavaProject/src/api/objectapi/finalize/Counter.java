@@ -1,0 +1,17 @@
+package api.objectapi.finalize;
+
+public class Counter {
+	private int no;
+	
+	public Counter(int no) {
+		this.no = no;
+	}
+
+	//GC에 의해 객체가 소멸될 때 JVM에 의해 호출 : 예외처리 필요
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println(no+"번 객체의 finallize()가 실행됨");
+		
+	}
+	
+}

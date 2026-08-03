@@ -28,12 +28,12 @@ public class CatchOrderEx2 {
 		//한개의 catch에 여러개의 exception 대입 가능
 		try {
 
-			System.out.println(arr[5]);
-			System.out.println(Integer.parseInt("a100"));
-			System.out.println(arr[2]);
+			System.out.println(arr[5]); //예외 발생 아래 남아있는 try문장 실행되지 않는다
+			System.out.println(Integer.parseInt("a100")); //예외 발생되면 아래 남아있는 try 문장 실행되지 않는다. 
+			System.out.println(arr[2]); //오류 없음
 		
 		}catch(ArrayIndexOutOfBoundsException | NumberFormatException e) {
-			System.out.println("실행 매개값의 수가 부족합니다");	
+			System.out.println("예외발생");	
 		}catch(Exception e) { //예외처리 클래스 중 최상위 클래스
 			System.out.println("실행에 문제가 있습니다");
 		}finally {

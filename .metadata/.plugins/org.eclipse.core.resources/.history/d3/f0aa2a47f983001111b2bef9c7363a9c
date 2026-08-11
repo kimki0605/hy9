@@ -1,0 +1,15 @@
+class A{
+	
+}
+
+class B{
+	
+}
+
+public class Test {
+
+	public static void main(String[] args) {
+		//주석
+		System.out.println("test 입니다.");
+	}
+}

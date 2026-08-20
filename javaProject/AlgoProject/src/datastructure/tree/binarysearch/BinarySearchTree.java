@@ -184,7 +184,99 @@ public class BinarySearchTree<E> {
 	
 	//실제 노드를 삭제하는 메소드, 삭제 후 대체 되고 난 뒤의 위치 노드를 반환
 	//삭제 후 재배치된 삭제 노드의 자식노드의 참조를 반환
-	private Node<E> deleteNode(Node<E> node){
+	private Node<E> deleteNode(Node<E> removeNode){
+		if(removeNode != null) {
+			if(removeNode.left == null && removeNode.right == null) { //삭제하려는 노드가 단말
+				if(removeNode==root) {
+					root = null;
+				}else {
+					removeNode=null;
+				}
+				return null;
+			}
+			
+			if(removeNode.left != null && removeNode.right != null) {//삭제하려는 노드의 양쪽 자식노드가 있음
+				//삭제하려는 node의 값을 다른 값으로 대체
+				//대체값 결정 방법
+				//-왼쪽서브트리에서 제일 큰값의 노드로 대체
+				//-오른쪽서브트리에서 제일 작은값의 노드로 대체
+				Node<E> replacement = getSuccessorAndUnlink(removeNode);
+				removeNode.value = replacement.value;
+			}else if(removeNode.left != null) { //삭제할 노드의 왼쪽 자식 노드만 있는 경우
+				if(removeNode==root) {
+					removeNode = removeNode.left;
+					root = removeNode;
+				}else {
+					removeNode=removeNode.left; //삭제할 노드의 왼쪽 자식 노드로 업데이트
+				}
+			}else { //삭제할 노드의 오른쪽 자식 노드만 있는 경우
+				if(removeNode==root) {
+					removeNode = removeNode.right;
+					root = removeNode;
+				}else {
+					removeNode=removeNode.right; //삭제할 노드의 왼쪽 자식 노드로 업데이트
+				}
+			}
+		}
+		return removeNode; //삭제된 자리 대체할 노드의 참조 	
+	}
+	
+	/*
+	 *삭제되는 노드의 자리를 대체할 노드(후계자)를 찾는 메소드
+	 *오른쪽 서브트리에서 가장 작은 값의 노드를 찾음
+	 *
+	 *@param node 삭제되는 노드(= 대체되어야할 노드)
+	 *@return
+	 */
+	private Node<E> getSyccessorAndUnlink(Node<E> node){
+		Node<E> currentParent = node;
+		Node<E> current = node.right;
+		
+		if(current.left==null) { //현재노드의 왼쪽 자식노드가 없으면 현재 노드가 가장 작은 값의 노드
+			//가장 작은값의 노드의 오른쪽 자식노드를 부모 노드의 오른쪽 자식으로 연결
+			currentParent.right = current.right;
+			current.right = null;
+			return current;
+		}
+		
+		//current의 왼쪽 노드가 null이 아님 -> 가장 작은값의 노드를 찾기(왼쪽으로 이동)
+		while(current.left != null) {
+			currentParent = current;
+			current = current.left;
+		}
+		//반복문 종료 후 current에 가장 작은값의 노드가 참조됨, current의 왼쪽 노드 없음
+		currentParent.left = current.right;
+		current.right = null;
+		return current;
+	}
+	
+	/*
+	 * 이진탐색트리에있는 원소 개수 반환
+	 */
+	public int size() {
+		return this.size;
+	}
+	
+	/*
+	 * 이진 탐색트리가 비어있는지를 판단하는 메서드
+	 */
+	public boolean isEmpty() {
+		return size()==0;
+	}
+	
+	/*
+	 * 이진탐색트리내에 찾고자 하는 객체가 존재하는지를 판단하는 메서드
+	 */
+	public boolean contaims(Object o) {
+		if(comparator == null) {
+			return containsUsingComparable(o);
+		}
+		return containsUsingComparator(o);
+	}
+	public void preorder() {
+		// TODO Auto-generated method stub
 		
 	}
+	
+	
 }

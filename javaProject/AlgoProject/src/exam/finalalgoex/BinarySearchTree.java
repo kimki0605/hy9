@@ -6,7 +6,6 @@ public class BinarySearchTree<E> {
 
     private Node<E> root;
     private int size;
-
     private final Comparator<? super E> comparator;
 
     public BinarySearchTree() {
@@ -19,9 +18,6 @@ public class BinarySearchTree<E> {
         this.size = 0;
     }
 
-    // ================================
-    // 노드 추가
-    // ================================
     public boolean add(E value) {
 
         if (comparator == null) {
@@ -49,29 +45,22 @@ public class BinarySearchTree<E> {
         }
 
         do {
-
             currentParent = current;
 
-            compResult =
-                    compValue.compareTo(current.value);
+            compResult = compValue.compareTo(current.value);
 
             if (compResult < 0) {
-
                 current = current.left;
-
             } else if (compResult > 0) {
-
                 current = current.right;
-
             } else {
-
                 return value;
             }
 
         } while (current != null);
 
         Node<E> newNode =
-                new Node<>(value, currentParent);
+                new Node<E>(value, currentParent);
 
         if (compResult < 0) {
             currentParent.left = newNode;
@@ -94,38 +83,28 @@ public class BinarySearchTree<E> {
         int compResult;
 
         if (current == null) {
-
             root = new Node<E>(value);
-
             size++;
-
             return null;
         }
 
         do {
-
             currentParent = current;
 
-            compResult =
-                    comp.compare(value, current.value);
+            compResult = comp.compare(value, current.value);
 
             if (compResult < 0) {
-
                 current = current.left;
-
             } else if (compResult > 0) {
-
                 current = current.right;
-
             } else {
-
                 return value;
             }
 
         } while (current != null);
 
         Node<E> newNode =
-                new Node<>(value, currentParent);
+                new Node<E>(value, currentParent);
 
         if (compResult < 0) {
             currentParent.left = newNode;
@@ -138,9 +117,7 @@ public class BinarySearchTree<E> {
         return null;
     }
 
-    // ================================
     // 검색
-    // ================================
     public E search(E value) {
 
         if (comparator == null) {
@@ -157,15 +134,10 @@ public class BinarySearchTree<E> {
                         compValue.compareTo(current.value);
 
                 if (result < 0) {
-
                     current = current.left;
-
                 } else if (result > 0) {
-
                     current = current.right;
-
                 } else {
-
                     return current.value;
                 }
             }
@@ -177,20 +149,13 @@ public class BinarySearchTree<E> {
             while (current != null) {
 
                 int result =
-                        comparator.compare(
-                                value,
-                                current.value);
+                        comparator.compare(value, current.value);
 
                 if (result < 0) {
-
                     current = current.left;
-
                 } else if (result > 0) {
-
                     current = current.right;
-
                 } else {
-
                     return current.value;
                 }
             }
@@ -199,284 +164,17 @@ public class BinarySearchTree<E> {
         return null;
     }
 
-    // ================================
-    // 노드 삭제
-    // ================================
-    public E remove(E value) {
-
-        if (comparator == null) {
-            return removeUsingComparable(value);
-        }
-
-        return removeUsingComparator(
-                value,
-                comparator);
-    }
-
-    private E removeUsingComparable(E value) {
-
-        Node<E> currentParent = null;
-        Node<E> current = root;
-
-        boolean hasLeft = false;
-
-        int resComp;
-
-        if (root == null) {
-            return null;
-        }
-
-        @SuppressWarnings("unchecked")
-        Comparable<? super E> compValue =
-                (Comparable<? super E>) value;
-
-        do {
-
-            resComp =
-                    compValue.compareTo(current.value);
-
-            if (resComp == 0) {
-                break;
-            }
-
-            currentParent = current;
-
-            if (resComp < 0) {
-
-                hasLeft = true;
-                current = current.left;
-
-            } else {
-
-                hasLeft = false;
-                current = current.right;
-            }
-
-        } while (current != null);
-
-        if (current == null) {
-            return null;
-        }
-
-        if (currentParent == null) {
-
-            deleteNode(current);
-
-            size--;
-
-            return value;
-        }
-
-        if (hasLeft) {
-
-            currentParent.left =
-                    deleteNode(current);
-
-        } else {
-
-            currentParent.right =
-                    deleteNode(current);
-        }
-
-        size--;
-
-        return value;
-    }
-
-    private E removeUsingComparator(
-            E value,
-            Comparator<? super E> comp) {
-
-        Node<E> currentParent = null;
-        Node<E> current = root;
-
-        boolean hasLeft = false;
-
-        if (root == null) {
-            return null;
-        }
-
-        while (current != null) {
-
-            int result =
-                    comp.compare(
-                            value,
-                            current.value);
-
-            if (result == 0) {
-                break;
-            }
-
-            currentParent = current;
-
-            if (result < 0) {
-
-                hasLeft = true;
-                current = current.left;
-
-            } else {
-
-                hasLeft = false;
-                current = current.right;
-            }
-        }
-
-        if (current == null) {
-            return null;
-        }
-
-        if (currentParent == null) {
-
-            deleteNode(current);
-
-        } else if (hasLeft) {
-
-            currentParent.left =
-                    deleteNode(current);
-
-        } else {
-
-            currentParent.right =
-                    deleteNode(current);
-        }
-
-        size--;
-
-        return value;
-    }
-
-    // ================================
-    // 실제 노드 삭제
-    // ================================
-    private Node<E> deleteNode(
-            Node<E> removeNode) {
-
-        if (removeNode != null) {
-
-            // 자식이 없는 경우
-            if (removeNode.left == null
-                    && removeNode.right == null) {
-
-                if (removeNode == root) {
-                    root = null;
-                }
-
-                return null;
-            }
-
-            // 자식이 양쪽에 있는 경우
-            if (removeNode.left != null
-                    && removeNode.right != null) {
-
-                Node<E> replacement =
-                        getSuccessorAndUnlink(
-                                removeNode);
-
-                removeNode.value =
-                        replacement.value;
-
-            } else if (removeNode.left != null) {
-
-                if (removeNode == root) {
-
-                    root = removeNode.left;
-
-                    removeNode = root;
-
-                } else {
-
-                    removeNode =
-                            removeNode.left;
-                }
-
-            } else {
-
-                if (removeNode == root) {
-
-                    root = removeNode.right;
-
-                    removeNode = root;
-
-                } else {
-
-                    removeNode =
-                            removeNode.right;
-                }
-            }
-        }
-
-        return removeNode;
-    }
-
-    // ================================
-    // 후계자 찾기
-    // ================================
-    private Node<E> getSuccessorAndUnlink(
-            Node<E> node) {
-
-        Node<E> currentParent = node;
-        Node<E> current = node.right;
-
-        if (current.left == null) {
-
-            currentParent.right =
-                    current.right;
-
-            current.right = null;
-
-            return current;
-        }
-
-        while (current.left != null) {
-
-            currentParent = current;
-            current = current.left;
-        }
-
-        currentParent.left =
-                current.right;
-
-        current.right = null;
-
-        return current;
-    }
-
-    // ================================
-    // 중위 순회
-    // ================================
-    public void inorder() {
-        inorder(root);
-    }
-
-    private void inorder(Node<E> node) {
-
-        if (node == null) {
-            return;
-        }
-
-        inorder(node.left);
-
-        System.out.println(node.value);
-
-        inorder(node.right);
-    }
-
-    // ================================
     // contains
-    // ================================
     public boolean contains(Object o) {
 
         if (comparator == null) {
             return containsUsingComparable(o);
         }
 
-        return containsUsingComparator(
-                o,
-                comparator);
+        return containsUsingComparator(o, comparator);
     }
 
-    private boolean containsUsingComparable(
-            Object o) {
+    private boolean containsUsingComparable(Object o) {
 
         @SuppressWarnings("unchecked")
         Comparable<? super E> value =
@@ -486,19 +184,13 @@ public class BinarySearchTree<E> {
 
         while (node != null) {
 
-            int res =
-                    value.compareTo(node.value);
+            int result = value.compareTo(node.value);
 
-            if (res > 0) {
-
-                node = node.right;
-
-            } else if (res < 0) {
-
+            if (result < 0) {
                 node = node.left;
-
+            } else if (result > 0) {
+                node = node.right;
             } else {
-
                 return true;
             }
         }
@@ -518,20 +210,13 @@ public class BinarySearchTree<E> {
         while (node != null) {
 
             int result =
-                    comp.compare(
-                            value,
-                            node.value);
+                    comp.compare(value, node.value);
 
             if (result < 0) {
-
                 node = node.left;
-
             } else if (result > 0) {
-
                 node = node.right;
-
             } else {
-
                 return true;
             }
         }
@@ -539,19 +224,137 @@ public class BinarySearchTree<E> {
         return false;
     }
 
-    // ================================
-    // 기타 메소드
-    // ================================
+    // 삭제
+    public E remove(E value) {
+
+        Node<E> parent = null;
+        Node<E> current = root;
+        boolean isLeftChild = false;
+
+        while (current != null) {
+
+            int result;
+
+            if (comparator == null) {
+
+                @SuppressWarnings("unchecked")
+                Comparable<? super E> compValue =
+                        (Comparable<? super E>) value;
+
+                result = compValue.compareTo(current.value);
+
+            } else {
+                result =
+                        comparator.compare(value, current.value);
+            }
+
+            if (result == 0) {
+                break;
+            }
+
+            parent = current;
+
+            if (result < 0) {
+                isLeftChild = true;
+                current = current.left;
+            } else {
+                isLeftChild = false;
+                current = current.right;
+            }
+        }
+
+        if (current == null) {
+            return null;
+        }
+
+        // 자식이 없는 경우
+        if (current.left == null && current.right == null) {
+
+            if (current == root) {
+                root = null;
+            } else if (isLeftChild) {
+                parent.left = null;
+            } else {
+                parent.right = null;
+            }
+        }
+
+        // 왼쪽 자식만 있는 경우
+        else if (current.right == null) {
+
+            if (current == root) {
+                root = current.left;
+            } else if (isLeftChild) {
+                parent.left = current.left;
+            } else {
+                parent.right = current.left;
+            }
+        }
+
+        // 오른쪽 자식만 있는 경우
+        else if (current.left == null) {
+
+            if (current == root) {
+                root = current.right;
+            } else if (isLeftChild) {
+                parent.left = current.right;
+            } else {
+                parent.right = current.right;
+            }
+        }
+
+        // 자식이 둘인 경우
+        else {
+
+            Node<E> successorParent = current;
+            Node<E> successor = current.right;
+
+            while (successor.left != null) {
+                successorParent = successor;
+                successor = successor.left;
+            }
+
+            current.value = successor.value;
+
+            if (successorParent.left == successor) {
+                successorParent.left = successor.right;
+            } else {
+                successorParent.right = successor.right;
+            }
+        }
+
+        size--;
+
+        return value;
+    }
+
+    // 전위 순회
+    public void preorder() {
+        preorder(root);
+    }
+
+    private void preorder(Node<E> node) {
+
+        if (node == null) {
+            return;
+        }
+
+        System.out.print(node.value + " ");
+
+        preorder(node.left);
+        preorder(node.right);
+    }
+
     public int size() {
-        return this.size;
+        return size;
     }
 
     public boolean isEmpty() {
-        return size() == 0;
+        return size == 0;
     }
 
     public void clear() {
-        size = 0;
         root = null;
+        size = 0;
     }
 }

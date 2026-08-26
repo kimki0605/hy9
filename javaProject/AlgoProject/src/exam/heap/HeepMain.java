@@ -2,7 +2,7 @@ package exam.heap;
 
 import java.util.Arrays;
 
-public class HeapMain {
+public class HeepMain {
 
     public static void main(String[] args) {
 

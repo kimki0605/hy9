@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>도서 정보 등록</title>
+</head>
+
+<body>
+
+	<h1>도서 정보 등록</h1>
+
+	<form action="bookForm" method="post">
+
+		<table>
+
+			<tr>
+				<td>도서번호</td>
+				<td>
+					<input type="text" name="bookNo" value="1001">
+				</td>
+			</tr>
+
+			<tr>
+				<td>도서명</td>
+				<td>
+					<input type="text" name="bookName" value="자바">
+				</td>
+			</tr>
+
+			<tr>
+				<td>저자</td>
+				<td>
+					<input type="text" name="bookAuthor" value="홍길동">
+				</td>
+			</tr>
+
+			<tr>
+				<td>가격</td>
+				<td>
+					<input type="text" name="bookPrice" value="20000">
+				</td>
+			</tr>
+
+			<tr>
+				<td>발행일</td>
+				<td>
+					<input type="date" name="bookDate" value="2021-12-15">
+				</td>
+			</tr>
+
+			<tr>
+				<td>재고</td>
+				<td>
+					<input type="text" name="bookStock" value="5">
+				</td>
+			</tr>
+
+			<tr>
+				<td>출판사번호</td>
+				<td>
+					<input type="text" name="publisherNo" value="1">
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="등록">
+					<input type="reset" value="취소">
+				</td>
+			</tr>
+
+		</table>
+
+	</form>
+
+</body>
+</html>

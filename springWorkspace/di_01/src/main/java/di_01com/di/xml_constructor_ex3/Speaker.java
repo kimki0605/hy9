@@ -1,0 +1,15 @@
+package di_01com.di.xml_constructor_ex3;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Speaker {
+
+	public void volumeUp() {
+		System.out.println("볼륨을 키웁니다.");
+	}
+
+	public void volumeDown() {
+		System.out.println("볼륨을 낮춥니다.");
+	}
+}

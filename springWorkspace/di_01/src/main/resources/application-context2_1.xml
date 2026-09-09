@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Speaker 객체 -->
+	<bean id="speaker"
+	      class="di_01com.di.xml_constructor_ex1.Speaker">
+	</bean>
+
+	<!-- TV 객체 -->
+	<bean id="tv"
+	      class="di_01com.di.xml_constructor_ex1.TV">
+
+		<!-- Setter를 이용한 DI -->
+		<property name="speaker" ref="speaker"/>
+
+	</bean>
+
+</beans>

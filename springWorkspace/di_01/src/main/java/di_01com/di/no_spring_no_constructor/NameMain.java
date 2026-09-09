@@ -1,0 +1,14 @@
+package di_01com.di.no_spring_no_constructor;
+
+public class NameMain {
+
+	public static void main(String[] args) {
+		//개발코드에서 NameService 객체 생성 후 NameController 객체 생성시 주입(전달) 
+		NameService service = new NameService();
+		service.showName("");
+		NameController controller = new NameController(service);
+		controller.show("홍길동");
+		
+	}
+
+}

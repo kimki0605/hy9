@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Model vs ModelAndView 우선순위</title>
+<title>form param 확인</title>
 </head>
 <body>
+	학번 : ${no }<br>
+	학년 : ${year }<br>
 	이름 : ${name }<br>
-	나이 : ${age }<br>
-	주소 : ${address }<br>
 </body>
 </html>

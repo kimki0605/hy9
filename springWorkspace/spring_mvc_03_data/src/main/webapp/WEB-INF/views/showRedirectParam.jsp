@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Model vs ModelAndView 우선순위</title>
+<title>redirect:param</title>
 </head>
 <body>
-	이름 : ${name }<br>
-	나이 : ${age }<br>
-	주소 : ${address }<br>
+	
 </body>
 </html>

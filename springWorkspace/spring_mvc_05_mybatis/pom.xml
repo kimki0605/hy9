@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.spring</groupId>
-	<artifactId>jdbcProject</artifactId>
-	<name>spring_mvc_04_jdbc</name>
+	<groupId>com.spring_mvc</groupId>
+	<artifactId>mybatis</artifactId>
+	<name>spring_mvc_05_mybatis</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -122,18 +122,23 @@
 			<version>23.5.0.24.07</version>
 		</dependency>
 		<dependency>
+			<groupId>commons-dbcp : 1.4</groupId>
+			<artifactId>commons-dbcp : 1.4</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.2.25.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.14</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>5.2.25.RELEASE</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
     <build>

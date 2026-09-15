@@ -25,7 +25,7 @@ public class ProductService implements IProductService{
 
 	@Override
 	public void updateProduct(ProductDTO prdDto) {
-		// TODO Auto-generated method stub
+		dao.updateProduct(prdDto);
 		
 	}
 
@@ -42,8 +42,7 @@ public class ProductService implements IProductService{
 
 	@Override
 	public ProductDTO detailViewProduct(String prdNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.detailViewProduct(prdNo);
 	}
 	
 	
